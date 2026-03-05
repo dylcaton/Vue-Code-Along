@@ -1,75 +1,35 @@
 <template>
   <h1>{{ message }}</h1>
-  <button @click="sortUsersByAge">Sort users by age</button>
-  <button @click="hideInactive = !hideInactive">
-    {{ toggleButtonName }}
-  </button>
 
-  <h2>Number of active users: {{ numberOfActiveUsers }}</h2>
-  <table>
-    <tr>
-      <th>Index</th>
-      <th>Id</th>
-      <th>Name</th>
-      <th>Age</th>
-      <th>Operation</th>
-    </tr>
-    <tr v-for="(user, index) in filteredUsers" :key="user.id">
-      <td>{{ index + 1 }}</td>
-      <td>{{ user.id }}</td>
-      <td :class="{ inactive: !user.isActive }">
-        {{ user.name }}
-      </td>
-      <td>{{ user.age }}</td>
-      <td>
-        <button @click="user.isActive = !user.isActive">
-          {{ user.isActive ? 'Deactivate' : 'Restore' }}
-        </button>
-      </td>
-    </tr>
-  </table>
+  <div class="card">
+    <h1>Scenario 1: Watch a "ref(primitive value)"</h1>
+    <h2>Number: {{ number }}</h2>
+    <button @click="number++">Increment number by 1</button>
+  </div>
 </template>
 
 <script setup>
-import { computed, ref } from 'vue';
+import { ref,watch } from 'vue'
 
-let message = ref('Hello, Computed Properties!');
+let message = ref('Hello, Watchers!')
 
-const users = ref([
-  { id: 1001, name: 'John Smith', age: 26, isActive: false },
-  { id: 1002, name: 'Tom Doe', age: 16, isActive: false },
-  { id: 1003, name: 'Frankin Wong', age: 18, isActive: true },
-])
+// Scenario 1: Watch a ref(primitive value), this is a comm
+let number = ref(1)
 
-let hideInactive = ref(false);
+let stopWatch = watch(number, (newValue, oldValue) => {
+  console.log('Watch a ref(primitive value): number changes', newValue, oldValue);
+}, {immediate: true})
 
-function sortUsersByAge() {
-  users.value.sort((a, b) => a.age - b.age);
+if (newValue>5) {
+  stopWatch();
 }
-
-let toggleButtonName = computed(() => hideInactive.value ? 'Show all' : 'Hide Inactive');
-
-let numberOfActiveUsers = computed(
-  ()=> {
-    console.log('computed property');
-    return users.value.filter((user)=> user.isActive).length
-})
-
-let computeNumberOfActiveUsers = () =>
-  {
-    console.log('method call');
-    return users.value.filter((user) => user.isActive).length
-  }
-
-let filteredUsers = computed(() => hideInactive.value ? users.value.filter(user => user.isActive) : users.value);
-
-console.log(numberOfActiveUsers.value);
 </script>
 
 <style scoped>
-
-  .inactive {
-    color: red;
-    text-decoration: line-through;
-  }
+.card {
+  background-color: purple;
+  color: white;
+  padding: 20px 10px;
+  margin-bottom: 10px;
+}
 </style>
