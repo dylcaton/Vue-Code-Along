@@ -2,12 +2,19 @@
   <h1>{{ message }}</h1>
 
   <div class="card">
-    <h1>Scenario 2: Watch a property in a "ref(object)"</h1>
-    <h2>Name: {{ wizard1.name }}</h2>
-    <h2>Wand: {{ wizard1.wand }}</h2>
-    <button @click="wizard1.name = wizard1.name.toUpperCase()">Change name to uppercase</button>
-    <button @click ="changeWizard1Wand">Change wand</button>
-    <button @click="wizard1.wand.core='Unicorn hair'">Change wand core</button>
+    <h1>Scenario 3: Watch a "ref(object)"</h1>
+    <h2>Name: {{ wizard2.name }}</h2>
+    <h2>Wand: {{ wizard2.wand }}</h2>
+    
+    <button @click="wizard2.name = wizard2.name.toUpperCase()">
+      Change name to upper case
+    </button>
+    
+    <button @click="wizard2.wand.core = 'Phoenix feather'">
+      Change wand core
+    </button>
+    
+    <button @click="changeWizard">Change wizard</button>
   </div>
 </template>
 
@@ -16,41 +23,35 @@ import { ref, watch } from 'vue'
 
 let message = ref('Hello, Watchers!')
 
-// Scenario 2: Watch a property in a ref(object)
-let wizard1 = ref({
-  id: 1001,
-  name: 'Harry Potter',
+// Scenario 3: Watch a ref(object)
+let wizard2 = ref({
+  id: 1003,
+  name: 'Ron Weasley',
   house: 'Gryffindor',
   age: 17,
   wand: {
-    core: 'Phoenix feather',
-    wood: 'Holly'
+    core: 'Unicorn hair',
+    wood: 'Willow'
   }
 })
 
-function changeWizard1Wand() {
-  wizard1.value.wand = {
-    core: 'Dragon heartstring',
-    wood: 'Vine'
+function changeWizard() {
+  wizard2.value = {
+    id: 1002,
+    name: 'Hermione Granger',
+    house: 'Gryffindor',
+    age: 17,
+    wand: {
+      core: 'Dragon heartstring',
+      wood: 'Vine'
+    }
   }
 }
 
-watch(
-  () => wizard1.value.name,
-  (newValue, oldValue)=> {
-    console.log('Watch a property in a ref(object): wizard1 name changes', newValue)
-  })
+watch(wizard2, (newValue, oldValue) => {
+  console.log('Watch a ref(object): wizard2 changes', newValue, oldValue)
+}, { deep: true })
 
-watch(()=> wizard1.value.wand,
-(newValue, oldValue) => {
-  console.log('Watch a property in a ref(object): wizard1 wand changes', newValue, oldValue),
-  {deep:true}
-})
-
-watch(()=> wizard1.value.wand.core,
-(newValue, oldValue) => {
-  console.log('Watch a property in a ref(object): wizard1 wand core changes', newValue, oldValue)
-})
 </script>
 
 <style scoped>
