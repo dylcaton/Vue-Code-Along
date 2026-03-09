@@ -1,11 +1,40 @@
-<script setup></script>
-
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+  <div class="card">
+    <h1 ref="title">Hello, Template Refs!</h1>
+    <input type="text" ref="input"/>
+    <br />
+    <button @click="printDomElements">
+      Print DOM elements in console log
+    </button>
+    <button @click="changeTitle">Change title</button>
+  </div>
 </template>
 
-<style scoped></style>
+<script setup>
+  import { ref, onMounted } from 'vue';
+
+  let title = ref();
+  let input = ref();
+
+  function printDomElements() {
+    console.log(title.value);
+    console.log(input.value);
+  }
+
+  function changeTitle() {
+    title.value.innerText = "Hellow world!";
+  }
+
+  onMounted (() => {
+    input.value.focus();
+  })
+  </script>
+
+<style scoped>
+.card {
+  background-color: purple;
+  color: white;
+  padding: 20px 10px;
+  margin-bottom: 10px;
+}
+</style>
