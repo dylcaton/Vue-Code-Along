@@ -1,11 +1,25 @@
-<script setup></script>
+
 
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+<!--   <ButtonCounter></ButtonCounter>
+  <ButtonCounter></ButtonCounter>
+
+  <button-counter></button-counter> -->
+
+  <hr />
+  <div style="background-color: orange; padding: 5px">
+    This is the root component.
+    <ComponentA></ComponentA> 
+    <ComponentA></ComponentA> 
+  </div>
+
+
+
 </template>
+
+<script setup>
+import ButtonCounter from './ButtonCounter.vue'
+import ComponentA from '@/ComponentA.vue'
+</script>
 
 <style scoped></style>
