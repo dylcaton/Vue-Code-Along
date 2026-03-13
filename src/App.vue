@@ -1,11 +1,22 @@
-<script setup></script>
-
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+  <BaseLayout>
+  <template #header><h1>Here might be a page title.</h1></template>
+  <template #main>
+    <p>A paragraph of the main content.</p>
+    <p>And another one.</p>
+    </template>
+  <template #footer>
+    <p>Here's some contact info.</p>
+  </template>
+
+
+  </BaseLayout>
 </template>
 
-<style scoped></style>
+<script setup>
+import BaseLayout from './BaseLayout.vue';
+</script>
+
+<style scoped>
+
+</style>
