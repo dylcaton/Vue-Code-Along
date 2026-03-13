@@ -1,11 +1,16 @@
-<script setup></script>
-
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+  <AlertBox>Invalid username or password. Please try again.</AlertBox>
+  <AlertBox></AlertBox>
+  <AlertBox>
+    <h1>The request timed out. Please refresh the page and try again.</h1>
+  </AlertBox>
 </template>
 
-<style scoped></style>
+<script setup>
+import AlertBox from './AlertBox.vue';
+
+</script>
+
+<style scoped>
+
+</style>
