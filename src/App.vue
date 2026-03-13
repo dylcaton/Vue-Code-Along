@@ -1,11 +1,25 @@
-<script setup></script>
-
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+  <h1>Message: {{message}}</h1>
+  <div style="background-color: orange; padding-left: 10px">
+    <ComponentA></ComponentA>
+  </div>
 </template>
 
-<style scoped></style>
+<script setup>
+import { ref, provide, readonly } from 'vue';
+
+let message = ref('Hello, Provide/inject!')
+import ComponentA from './ComponentA.vue';
+function updateMessage() {
+  message.value = 'Hello, Provide/inject! Updated.'
+}
+provide('msg', {message, updateMessage})
+
+let count = ref(0);
+provide('read-only-count', readonly(count))
+
+</script>
+
+<style scoped>
+
+</style>

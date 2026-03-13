@@ -1,0 +1,20 @@
+<template>
+    <div style="background-color: lightblue; padding-left: 10px">
+    <h2>This is component B</h2>
+    {{ messageFromApp }}
+    <button @click = "updateMessage">Update message</button>
+    </div>
+</template>
+
+<script setup>
+import { inject } from 'vue';
+
+let {message: messageFromApp, updateMessage} = inject('msg', 'default message')
+
+
+
+</script>
+
+<style  scoped>
+
+</style>
